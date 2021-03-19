@@ -360,10 +360,110 @@ textarea {
     padding: 0.2em 0;
 }
 
+body {
+    background-color: #efd9d9;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    color: #030306;
+}
+
 *,
 *:before,
 *:after {
     box-sizing: border-box;
 }
 
+.wrap {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 /* Blocks */
+.registration {
+    max-width: 450px;
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(3, 3, 6, 0.2);
+}
+
+.registration__title {
+    padding: 1rem 0;
+    margin-bottom: 1.2rem;
+    font-size: 1.7rem;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid #030306;
+}
+
+.form {
+    max-width: 500px;
+    width: 100%;
+}
+
+.form__control {
+    position: relative;
+    margin-bottom: 1.2rem;
+}
+
+.form__control input {
+    min-width: 90%;
+    padding: .3rem;
+    line-height: 1.2;
+    outline: none;
+    border: 2px solid #ccc;
+}
+
+.form__control i,
+  .form__control .form__error {
+    display: none;
+}
+
+.form__control.success > input {
+    border: 2px solid #11a208;
+}
+
+.form__control.success > .fa-check-circle {
+    display: inline-block;
+    color: #11a208;
+}
+
+.form__control.error > input {
+    border: 2px solid #d62318;
+}
+
+.form__control.error > .fa-times-circle {
+    display: inline-block;
+    color: #d62318;
+}
+
+.form__control.error > .form__error {
+    display: block;
+}
+
+.form__error {
+    font-size: 1rem;
+    color: #d62318;
+}
+
+.btn--submit {
+    display: block;
+    min-width: 110px;
+    margin: 15px auto;
+    padding: .4rem;
+    background-color: #efd9d9;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color .2s linear;
+}
+
+.btn--submit:hover {
+    background-color: #9cfa96;
+}
