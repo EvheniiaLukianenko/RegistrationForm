@@ -1,100 +1,99 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/assets/js/app.js");
-/******/ })
-/************************************************************************/
-/******/ ({
+let registration = document.getElementById('registration');
+let form = document.getElementById('form');
+let username = document.getElementById('username');
+let email = document.getElementById('email');
+let password = document.getElementById('password');
+let password2 = document.getElementById('password2');
 
-/***/ "./src/assets/js/app.js":
-/*!******************************!*\
-  !*** ./src/assets/js/app.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+form.addEventListener('submit', function (e) {
+	e.preventDefault();
 
-eval("\n\n//# sourceURL=webpack:///./src/assets/js/app.js?");
+	checkInputs();
+	showSuccessMessage();
+});
 
-/***/ })
+function checkInputs() {
+	let usernameValue = username.value.trim();
+	let emailValue = email.value.trim();
+	let passwordValue = password.value.trim();
+	let password2Value = password2.value.trim();
 
-/******/ });
+	if(usernameValue === '') {
+		setError(username, 'Username cannot be blank');
+	} else {
+		setSuccess(username);
+		localStorage.setItem('username', usernameValue);
+	}
+
+	if(emailValue === '') {
+		setError(email, 'Email cannot be blank');
+	} else if(!isEmail(emailValue)) {
+		setError(email, 'Please use valid email address');
+	} else {
+		setSuccess(email);
+		localStorage.setItem('email', emailValue);
+	}
+
+	if(passwordValue === '') {
+		setError(password, 'Password cannot be blank');
+	} else if(!isPasswordLong(passwordValue)) {
+		setError(password, 'Password must be at least 8 characters long');
+	} else {
+		setSuccess(password);
+	}
+
+	if(passwordValue === password2Value && isPasswordLong(passwordValue)) {
+		setSuccess(password2);
+		localStorage.setItem('password', passwordValue);
+	} else {
+		setError(password2, 'Passwords do not match');
+	}
+}
+
+function setError(input, message) {
+	let formControl = input.parentElement;
+	let formError = formControl.querySelector('.form__error');
+
+	// add error message inside .form__error
+	formError.innerText = message;
+
+	//add error class to .form__control
+	formControl.className = 'form__control error';
+}
+
+
+function setSuccess(input) {
+	let formControl = input.parentElement;
+
+	//add success class to .form__control
+	formControl.className = 'form__control success';
+}
+
+function isEmail(email) {
+	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  	return re.test(String(email).toLowerCase());
+}
+
+function isPasswordLong(password) {
+	return password.length >= 8 ? true:false;
+}
+
+function showSuccessMessage() {
+	let formControlArray = form.querySelectorAll('.form__control');
+	let count = 0;
+
+	for(let i = 0; i < formControlArray.length; i++) {
+		let formControlClass = formControlArray[i].className;
+
+		if(formControlClass === 'form__control success') {
+			count += 1;
+		}
+	}
+
+	console.log(count);
+
+	if (count === formControlArray.length) {
+		form.style.display = 'none';
+		registration.querySelector('.form__success').style.display = 'block';
+	}
+}

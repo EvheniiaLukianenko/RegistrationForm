@@ -413,6 +413,10 @@ body {
     margin-bottom: 1.2rem;
 }
 
+.form__control label {
+    font-weight: 500;
+}
+
 .form__control input {
     min-width: 90%;
     padding: .3rem;
@@ -451,6 +455,14 @@ body {
 .form__error {
     font-size: 1rem;
     color: #d62318;
+}
+
+.form__success {
+    display: none;
+    padding: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    color: #11a208;
 }
 
 .btn--submit {

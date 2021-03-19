@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     
     <!-- Useful meta tags -->
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -21,9 +21,9 @@
 	<div class="page">
 
 	    <div class="wrap">
-	    	<div class="registration">
+	    	<div class="registration" id="registration">
 	    		<h2 class="registration__title">Create Account</h2>
-	    		<form class="form" id="form" action="" method="get">
+	    		<form class="form" id="form">
 	    			<div class="form__control">
 	    				<label for="username">Username</label>
 	    				<input id="username" type="text" placeholder="Alice">
@@ -58,6 +58,7 @@
 	    
 	    			<button class="btn--submit" type="submit">Submit</button>
 	    		</form>
+	    		<div class="form__success">You are succesfully registered!</div>
 	    	</div> <!-- /.registration -->
 	    </div> <!-- /.wrap -->
 	    
